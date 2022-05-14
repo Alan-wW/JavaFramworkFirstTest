@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    &lt;!&ndash;开启只对controller的扫描&ndash;&gt;-->
+<!--    <context:component-scan base-package="cn.ideal">-->
+<!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+<!--    </context:component-scan>-->
+
+<!--    &lt;!&ndash;配置视图解析器&ndash;&gt;-->
+<!--    <bean id="org" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        &lt;!&ndash;JSP 目录&ndash;&gt;-->
+<!--        <property name="prefix" value="/WEB-INF/pages/"/>-->
+<!--        &lt;!&ndash;文件后缀&ndash;&gt;-->
+<!--        <property name="suffix" value=".jsp"/>-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash;不过滤静态资源&ndash;&gt;-->
+<!--    <mvc:resources mapping="/css/**" location="/css/"/>-->
+<!--    <mvc:resources mapping="/images/**" location="/images/"/>-->
+<!--    <mvc:resources mapping="/js/**" location="/js/"/>-->
+
+    <!--开启注解支持-->
+<!--    <mvc:annotation-driven/>-->
+
+    <mvc:annotation-driven>
+            <mvc:message-converters>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="defaultCharset" value="utf-8">
+                    </property>
+                </bean>
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>application/json</value>
+                        </list>
+                    </property>
+                    <property name="features">
+                        <list>
+                            <value>WriteMapNullValue</value>
+                            <value>QuoteFieldNames</value>
+                        </list>
+                    </property>
+                </bean>
+            </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <context:component-scan base-package="com.exam" />
+
+</beans>
